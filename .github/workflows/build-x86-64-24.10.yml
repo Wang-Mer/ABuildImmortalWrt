@@ -65,16 +65,20 @@ jobs:
             echo -e "NO docker"
           fi
 
+      - name: Get current date and time
+        id: date
+        run: echo "current_date=$(date '+%Y年%m月%d日-%H时%M分')" >> $GITHUB_ENV
+
       - name: Create GitHub Release Info
         uses: softprops/action-gh-release@v2.1.0
         with:
           tag_name: Autobuild-x86-64
-          name: ImmortWrt-x86-64-efi
+          name: "ImmortWrt-24.10-x86-64-efi ${{ env.current_date }}"
           body_path: ${{ github.workspace }}/info.md
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.BuildImmortalWrt }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload ImmortWrt as release assets
         uses: softprops/action-gh-release@v2.1.0
@@ -85,5 +89,5 @@ jobs:
             ${{ github.workspace }}/*.sha256
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.BuildImmortalWrt }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
