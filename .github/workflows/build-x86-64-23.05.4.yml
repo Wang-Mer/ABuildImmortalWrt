@@ -9,6 +9,7 @@ on:
         default: '1024'
         type: choice
         options:
+          - '1024'
           - '5120'
           - '10240'
       include_docker:
