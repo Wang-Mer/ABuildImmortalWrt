@@ -61,11 +61,11 @@ jobs:
 
       - name: Create info
         run: |
-        # 获取用户输入的固件大小和是否包含 Docker 插件
+          # 获取用户输入的固件大小和是否包含 Docker 插件
           profiles="${{ github.event.inputs.profile }}"
           include_docker="${{ github.event.inputs.include_docker }}"
           
-        # 根据固件大小判断单位是 MB 还是 GB
+          # 根据固件大小判断单位是 MB 还是 GB
           if [ "$profiles" -gt 1024 ]; then
           size_in_gb=$(echo "scale=2; $profiles/1024" | bc)
           size="软件包大小 ${size_in_gb} GB"
@@ -73,14 +73,14 @@ jobs:
           size="软件包大小 ${profiles} MB"
           fi
 
-        # 判断是否包含 Docker 插件
+          # 判断是否包含 Docker 插件
           if [ "$include_docker" == "yes" ]; then
           docker_status="带"
           else
           docker_status="不带"
           fi
           
-        # 使用 sed 替换模板文件中的占位符并生成 info.md
+          # 使用 sed 替换模板文件中的占位符并生成 info.md
           sed -e "s/{{size}}/$size/" -e "s/{{info}}/$docker_status/" ${{ github.workspace }}/info_template.md > ${{ github.workspace }}/x86-64/info.md
 
       - name: Get current date and time
