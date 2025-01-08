@@ -61,13 +61,6 @@ jobs:
 
       - name: Create info
         run: |
-          if [ "${{ github.event.inputs.include_docker }}" == "yes" ]; then
-            extra_content="#### 默认带docker"
-            echo -e "\n $extra_content" >> ${{ github.workspace }}/info.md
-          else
-            echo -e "NO docker"
-          fi
-          
         # 获取用户输入的固件大小和是否包含 Docker 插件
           profiles="${{ github.event.inputs.profile }}"
           include_docker="${{ github.event.inputs.include_docker }}"
