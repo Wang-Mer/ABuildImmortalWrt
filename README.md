@@ -26,6 +26,43 @@ https://mirrors.sjtug.sjtu.edu.cn/immortalwrt/releases/23.05.4/packages/x86_64/l
 https://github.com/wukongdaily/RunFilesBuilder<br>
 https://github.com/wukongdaily/DockerTarBuilder
 
+## 常见问题
+
+### 编译正常,上传`releases`失败
+#### 问题 介绍
+一般在 `Create GitHub Release Info` 这个环节 出问题 , 下面有 错误 信息
+```log
+Run softprops/action-gh-release@v2.1.0
+  with:
+    tag_name: Autobuild-x86-64
+    name: ImmortWrt-24.10-x86-64-efi 2025年01月08日-06时28分
+    body_path: /home/runner/work/ABuildImmortalWrt/ABuildImmortalWrt/info.md
+    draft: false
+    prerelease: false
+    token: ***
+  env:
+    current_date: 2025年01月08日-06时28分
+    GITHUB_TOKEN: ***
+👩‍🏭 Creating new GitHub release for tag Autobuild-x86-64...
+⚠️ GitHub release failed with status: 403
+{"message":"Resource not accessible by integration","documentation_url":"https://docs.github.com/rest/releases/releases#create-a-release","status":"403"}
+Skip retry — your GitHub token/PAT does not have the required permission to create a release
+Error: Resource not accessible by integration - https://docs.github.com/rest/releases/releases#create-a-release
+```
+#### 问题 解决
+项目不同 解决方法的地址也不同 根据 `[]` 中的 信息进行填写 然后访问
+```shell
+https://github.com/[github用户名]/[github项目名称]]/settings/actions
+```
+
+进入网站和 就是 项目设置中的 `actions` 
+
+然后 找到  `Workflow permissions` 
+
+![img.png](images/Issue_1.png)
+
+根据图片进行设置就好了
+
 # 🌟鸣谢
 ### https://github.com/immortalwrt
 ### ![AutoBuildImmortalWrt](https://github.com/wukongdaily/AutoBuildImmortalWrt)
