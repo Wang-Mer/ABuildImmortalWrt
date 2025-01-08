@@ -15,7 +15,7 @@ on:
         description: |
           是否编译 Docker 插件
         required: true
-        default: 'yes'
+        default: 'no'
         type: choice
         options:
           - 'yes'
@@ -71,12 +71,12 @@ jobs:
 
       - name: Get current date and time
         id: date
-        run: echo "current_date=$(date '+%Y年%m月%d日-%H时%M分')" >> $GITHUB_ENV
+        run: echo "current_date=$(date '+%Y-%m-%d %H:%M')" >> $GITHUB_ENV
 
-      - name: Create GitHub Release Info
+      - name: Create GitHub Release Info for 24.10
         uses: softprops/action-gh-release@v2.1.0
         with:
-          tag_name: Autobuild-x86-64
+          tag_name: Autobuild-ImmortWrt-24.10-x86-64
           name: "ImmortWrt-24.10-x86-64-efi ${{ env.current_date }}"
           body_path: ${{ github.workspace }}/info.md
           draft: false
@@ -84,10 +84,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload ImmortWrt as release assets
+      - name: Upload ImmortWrt 24.10 as release assets
         uses: softprops/action-gh-release@v2.1.0
         with:
-          tag_name: Autobuild-x86-64
+          tag_name: Autobuild-ImmortWrt-24.10-x86-64
           files: |
             ${{ github.workspace }}/*squashfs-combined-efi.img.gz
             ${{ github.workspace }}/*.sha256
